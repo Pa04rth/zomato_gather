@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Zomato Gather",
@@ -13,8 +21,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <ClerkProvider publishableKey="pk_test_d2lyZWQtYmxvd2Zpc2gtMTQuY2xlcmsuYWNjb3VudHMuZGV2JA">
+      <html lang="en">
+        <body className={` antialiased`}>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -1,6 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "../components/ui/button";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+  SignOutButton,
+  UserButton,
+} from "@clerk/nextjs";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +23,6 @@ const Navbar = () => {
               ZomatoGather
             </h1>
           </div>
-
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
@@ -51,20 +58,36 @@ const Navbar = () => {
               </a>
             </div>
           </div>
-
           {/* Auth Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Button
-              variant="outline"
-              className="border-[#E23744] text-[#E23744] hover:bg-[#E23744] hover:text-white"
-            >
-              Sign In
-            </Button>
-            <Button className="bg-[#E23744] hover:bg-[#C41E3A] text-white">
-              Sign Up
-            </Button>
-          </div>
 
+          <div className="hidden md:flex items-center space-x-4">
+            <SignedOut>
+              <SignInButton mode="modal">
+                <Button
+                  variant="outline"
+                  className="border-[#E23744] text-[#E23744] hover:bg-[#E23744] hover:text-white"
+                >
+                  Sign In
+                </Button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <Button className="bg-[#E23744] hover:bg-[#C41E3A] text-white">
+                  Sign Up
+                </Button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+              <SignOutButton>
+                <Button
+                  variant="outline"
+                  className="ml-2 border-[#E23744] text-[#E23744] hover:bg-[#E23744] hover:text-white"
+                >
+                  Sign Out
+                </Button>
+              </SignOutButton>
+            </SignedIn>
+          </div>
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
@@ -124,17 +147,19 @@ const Navbar = () => {
               >
                 Contact
               </a>
-              <div className="flex flex-col space-y-2 px-3 py-2">
-                <Button
-                  variant="outline"
-                  className="border-[#E23744] text-[#E23744]"
-                >
-                  Sign In
-                </Button>
-                <Button className="bg-[#E23744] hover:bg-[#C41E3A] text-white">
-                  Sign Up
-                </Button>
-              </div>
+              <SignedIn>
+                <div className="flex flex-col space-y-2 px-3 py-2">
+                  <UserButton />
+                  <SignOutButton>
+                    <Button
+                      variant="outline"
+                      className="border-[#E23744] text-[#E23744]"
+                    >
+                      Sign Out
+                    </Button>
+                  </SignOutButton>
+                </div>
+              </SignedIn>
             </div>
           </div>
         )}
