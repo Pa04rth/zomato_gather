@@ -27,7 +27,7 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               <a
-                href="#"
+                href="/"
                 className="text-gray-700 hover:text-[#E23744] transition-colors duration-200 font-medium"
               >
                 Home

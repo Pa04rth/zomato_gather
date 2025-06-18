@@ -30,5 +30,6 @@ export const config = {
     "/contact(.*)",
     "/terms(.*)",
     "/privacy(.*)",
+    "/browseVendor(.*)",
   ],
 };
